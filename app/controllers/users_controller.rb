@@ -90,7 +90,7 @@ class UsersController < ApplicationController
       authenticate_with_open_id(params[:open_id_url], :return_to => open_id_create_url,
         :required => [:nickname, :email]) do |result, identity_url, registration|
         if result.successful?
-          create_new_user(:identity_url => identity_url, :login => registration['nickname'], :email => registration['email'])
+          create_new_user(:identity_url => identity_url, :login => identity_url, :email => registration['email'])
         else
           failed_creation(result.message || "Sorry, something went wrong")
         end
@@ -188,6 +188,17 @@ class UsersController < ApplicationController
       flash[:error] = "You cannot update another user's email address!"
       redirect_to edit_email_user_url(@user)
     end
+  end  
+  
+  # DELETE /users/1
+  # DELETE /users/1.xml
+  def destroy
+    current_user.delete!
+    
+    logout_killing_session!
+    
+    flash[:notice] = "Your account has been removed."
+    redirect_back_or_default(root_path)
   end  
   
   protected
