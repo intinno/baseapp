@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       if @user.nil?
         flash.now[:error] = 'No account was found by that login or email address.'
       else
-          @user.forgot_password if @user.active?
+        @user.forgot_password if @user.active?
       end
     else
       # Render forgot_password.html.erb
@@ -97,20 +97,10 @@ class UsersController < ApplicationController
   end
   
   def edit_password
-    if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your password. You are using OpenID!"
-      redirect_to :back
-    end
-    
     # render edit_password.html.erb
   end
   
   def update_password    
-    if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your password. You are using OpenID!"
-      redirect_to :back
-    end
-    
     if current_user == @user
       current_password, new_password, new_password_confirmation = params[:current_password], params[:new_password], params[:new_password_confirmation]
       
@@ -141,20 +131,10 @@ class UsersController < ApplicationController
   end
   
   def edit_email
-    if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your email address. You are using OpenID!"
-      redirect_to :back
-    end
-    
     # render edit_email.html.erb
   end
   
   def update_email
-    if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your email address. You are using OpenID!"
-      redirect_to :back
-    end
-    
     if current_user == @user
       if @user.update_attributes(:email => params[:email])
         flash[:notice] = "Your email address has been updated."
@@ -189,11 +169,7 @@ class UsersController < ApplicationController
   def create_new_user(attributes)
     @user = User.new(attributes)
     if @user && @user.valid?
-      if @user.not_using_openid?
-        @user.register!
-      else
-        @user.register_openid!
-      end
+      @user.register!
     end
     
     if @user.errors.empty?
@@ -206,8 +182,7 @@ class UsersController < ApplicationController
   def successful_creation(user)
     redirect_back_or_default(root_path)
     flash[:notice] = "Thanks for signing up!"
-    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
-    flash[:notice] << " You can now login with your OpenID." if ! @user.not_using_openid?
+    flash[:notice] << " We're sending you an email with your activation code."
   end
   
   def failed_creation(message = 'Sorry, there was an error creating your account')
