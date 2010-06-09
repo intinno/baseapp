@@ -23,7 +23,8 @@ ul {
 }
 /** Header */
 #header {
-	background-color: #204ca0;
+	/*background-color: #204ca0;*/
+	background-color:#333333;
 	margin: 0;
 	padding: 0.5em 1em 0 3em;
 }
@@ -67,7 +68,8 @@ ul {
 }
 #tabs a {
 	color: #fff;
-	background-color: #327aff;
+	/*background-color: #327aff;*/
+	background-color: #666;
 	text-decoration: none;
 	float: left;
 	font-size: 13px;
@@ -82,12 +84,12 @@ ul {
 }
 #tabs .workspace a {
 	background-color: #f00;
-
 /* TODO: different color */
 }
 #tabs li a.current {
 	color: #ffffff;
-	background-color: #bfd847;
+	/*background-color: #bfd847;*/
+	background-color: #999;
 }
 #tabs .with_space a,
 #tabs .with_space a.current {
