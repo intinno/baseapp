@@ -1,3 +1,4 @@
+*~
 log/*
 tmp/*
 database.yml
@@ -5,5 +6,6 @@ database.yml
 *.sqlite3
 doc/api
 .DS_Store
-.svn
+.git
 coverage
+.bundle/
