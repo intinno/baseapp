@@ -76,18 +76,7 @@ class UsersController < ApplicationController
 
   def create
     logout_keeping_session!
-    if using_open_id?
-      authenticate_with_open_id(params[:open_id_url], :return_to => open_id_create_url,
-        :required => [:nickname, :email]) do |result, identity_url, registration|
-        if result.successful?
-          create_new_user(:identity_url => identity_url, :login => identity_url, :email => registration['email'])
-        else
-          failed_creation(result.message || "Sorry, something went wrong")
-        end
-      end
-    else
-      create_new_user(params[:user])
-    end
+    create_new_user(params[:user])
   end
 
   def activate
