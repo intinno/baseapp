@@ -22,7 +22,7 @@
 		<li><%= link_to "Delete", admin_user_url(@user), :method => :delete, :confirm => "Are you sure you want to delete this account?" %></li>
 	<% end -%>
 	
-	<% # TODO: Uncomment to enable user purging by the administrator %>
+	<%# TODO: Uncomment to enable user purging by the administrator %>
 	<!--
 	<% if @user.deleted? -%>
 		<li><%= link_to "Purge", purge_admin_user_url(@user), :method => :delete, :confirm => "Are you sure you want to remove this account, and all data associated with it from base_app?" %></li>
