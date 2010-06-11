@@ -1,6 +1,7 @@
 --- 
 javascripts: 
 - base: 
+  - jquery
   - application
 stylesheets: 
 - base: 
@@ -8,5 +9,6 @@ stylesheets:
 - admin:
   - default
   - admin
+  - jquery.jeditable.mini
 - dialog:
   - dialog

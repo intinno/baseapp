@@ -2,9 +2,9 @@ class Admin::UsersController < ApplicationController
   require_role :admin
   layout 'admin'
   
-  %w(email login).each do |attr|
-    in_place_edit_for :user, attr.to_sym
-  end
+#   %w(email login).each do |attr|
+#     in_place_edit_for :user, attr.to_sym
+#   end
   
   def reset_password
     @user = User.find(params[:id])
