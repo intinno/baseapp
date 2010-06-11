@@ -105,7 +105,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.register!
+      if @user.valid? && @user.register!
         flash[:notice] = "User was successfully created."
         format.html { redirect_to(admin_user_url(@user)) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
